@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>RPG - Painel de Controle</title>
+    <style>
+        /* Estilos básicos para a tela não ficar feia */
+        body { font-family: sans-serif; padding: 20px; background-color: #f0f0f5; }
+        .menu { display: flex; gap: 10px; margin-bottom: 20px; }
+        button { padding: 10px 20px; cursor: pointer; border: none; border-radius: 5px; font-weight: bold; }
+        .btn-menu { background-color: #2c3e50; color: white; }
+        .btn-menu:hover { background-color: #1a252f; }
+        .btn-salvar { background-color: #27ae60; color: white; margin-top: 15px;}
+        .btn-cancelar { background-color: #7f8c8d; color: white; margin-top: 15px; display: none; }
+        
+        table { width: 100%; border-collapse: collapse; background: white; margin-top: 20px; }
+        th, td { border: 1px solid #bdc3c7; padding: 12px; text-align: left; }
+        th { background-color: #34495e; color: white; }
+        
+        .area-crud { background: white; padding: 20px; border-radius: 8px; display: none; }
+        .campo { margin-bottom: 10px; }
+        .campo label { display: inline-block; width: 120px; text-transform: capitalize; }
+        .campo input { padding: 5px; width: 200px; }
+    </style>
+</head>
+<body>
+
+    <h1>🏰 Sistema Gestor de RPG</h1>
+    
+    <div class="menu">
+        <button class="btn-menu" onclick="abrirPainel('usuarios')">👥 Usuários</button>
+        <button class="btn-menu" onclick="abrirPainel('personagens')">🧝 Personagens</button>
+        <button class="btn-menu" onclick="abrirPainel('magias')">🪄 Magias</button>
+        <button class="btn-menu" onclick="abrirPainel('criaturas')">🐉 Criaturas</button>
+    </div>
+
+    <h2 id="tituloCategoria">Selecione uma categoria acima</h2>
+
+    <div id="painelCrud" class="area-crud">
+        <h3 id="tituloAcao">Cadastrar Novo</h3>
+        <form id="formularioDeDados">
+            <div id="caixasDeTexto">
+                </div>
+            <button type="submit" class="btn-salvar">💾 Salvar no Servidor</button>
+            <button type="button" class="btn-cancelar" id="btnCancelarEdicao" onclick="resetarTela()">❌ Cancelar Edição</button>
+        </form>
+    </div>
+
+    <table id="tabelaDados">
+        <thead id="cabecalhoDaTabela"></thead>
+        <tbody id="corpoDaTabela"></tbody>
+    </table>
+
+    <script src="app.js"></script>
+</body>
+</html>
