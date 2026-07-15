@@ -4,9 +4,12 @@ const heroi = {
   nome: "Aragorn",
   classe: "Guerreiro",
   vida: 100,
+  vidaMaxima: 100,
   ataque: 15,
   defesa: 8,
   nivel: 1,
+  xp: 0,
+  ouro: 0,
   estaVivo: true
 };
 

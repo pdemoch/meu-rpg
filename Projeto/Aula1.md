@@ -143,12 +143,17 @@ const heroi = {
   nome: "Aragorn",
   classe: "Guerreiro",
   vida: 100,
+  vidaMaxima: 100,
   ataque: 15,
   defesa: 8,
   nivel: 1,
+  xp: 0,
+  ouro: 0,
   estaVivo: true
 };
 ```
+
+> **Nota de design:** `vidaMaxima`, `xp` e `ouro` ainda não são usados hoje, mas já entram no objeto porque o jogo vai precisar deles mais à frente (curar, subir de nível, comprar na loja). São só números — explique como "a vida cheia do herói" e "começa em zero". Isso evita ter que reescrever o herói lá pela aula 11.
 
 Explique que um **objeto** guarda vários dados relacionados, cada um com um **nome (propriedade)** e um **valor**. Para acessar cada dado, usamos o ponto:
 
@@ -202,9 +207,12 @@ const heroi = {
   nome: "Aragorn",
   classe: "Guerreiro",
   vida: 100,
+  vidaMaxima: 100,
   ataque: 15,
   defesa: 8,
   nivel: 1,
+  xp: 0,
+  ouro: 0,
   estaVivo: true
 };
 
