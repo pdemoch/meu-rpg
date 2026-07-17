@@ -69,7 +69,7 @@ Agora o combate de verdade. Guardamos o inimigo atual e, a cada clique em Atacar
 ```js
 let inimigoAtual = criarInimigo("Goblin", 40, 10, 3);
 
-function turnoDeAtaque() {
+function atacarTurno() {
   if (!inimigoAtual.estaVivo()) {
     escreverLog("Não há inimigo. Desça para o próximo andar.");
     return;
@@ -82,16 +82,16 @@ function turnoDeAtaque() {
   } else {
     atacar(inimigoAtual, heroi);
   }
-  renderFicha(heroi);
+  renderTudo(heroi, inimigoAtual);
   if (!heroi.estaVivo()) {
     escreverLog("GAME OVER");
   }
 }
 
-document.getElementById("btnAtacar").addEventListener("click", turnoDeAtaque);
+document.getElementById("btnAtacar").addEventListener("click", atacarTurno);
 document.getElementById("btnPocao").addEventListener("click", function () {
   usarPocao(heroi);
-  renderFicha(heroi);
+  renderTudo(heroi, inimigoAtual);
 });
 ```
 
@@ -110,7 +110,7 @@ Recapitule: evento, `addEventListener`, um turno por clique, re-render. Gancho d
 
 ## 5. Código final da aula
 
-`index.html` com os botões `btnAtacar`, `btnPocao`, `btnDescer` (bloco acima). No `game.js`, a função `turnoDeAtaque` e os `addEventListener` (blocos acima). Lembrete: trocar os `console.log` do combate por `escreverLog`.
+`index.html` com os botões `btnAtacar`, `btnPocao`, `btnDescer` (bloco acima). No `game.js`, a função `atacarTurno` e os `addEventListener` (blocos acima). Lembrete: trocar os `console.log` do combate por `escreverLog`.
 
 ---
 

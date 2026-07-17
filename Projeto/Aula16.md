@@ -78,22 +78,60 @@ function verificarFimDeJogo(heroi, andarAtual, totalAndares) {
 
 Chame essa verificação depois de cada turno/andar.
 
-### ⏱️ 32–42 min — Retoques finais
+### ⏱️ 32–40 min — Recomeçar de verdade (Novo Jogo)
+Um botão "Novo Jogo" precisa reiniciar **tudo** — e aqui mora uma armadilha clássica. A lista `masmorra` é criada uma vez, e os inimigos dentro dela são **objetos**. Durante a partida, o dano é aplicado nesses objetos e a vida deles vai a zero. Se o "Novo Jogo" só reiniciar o herói e o andar, os inimigos **continuam mortos** da partida anterior — e o jogador atravessa os andares sem lutar.
+
+A solução: transformar a criação da masmorra numa **função** e chamá-la de novo ao recomeçar.
+
+```js
+function criarMasmorra() {
+  return [
+    criarInimigo("Rato Gigante", 20, 6, 1),
+    criarInimigo("Goblin", 40, 10, 3),
+    criarInimigo("Esqueleto", 35, 12, 2),
+    criarInimigo("Orc", 60, 14, 6),
+    criarChefe()
+  ];
+}
+
+let masmorra = criarMasmorra();   // substitui o "const masmorra = [...]" da Aula 08
+
+function habilitarBotoes(ativo) {
+  document.getElementById("btnAtacar").disabled = !ativo;
+  document.getElementById("btnPocao").disabled = !ativo;
+  document.getElementById("btnDescer").disabled = !ativo;
+}
+
+function novoJogo() {
+  localStorage.removeItem("masmorra-save");
+  heroi = criarHeroi("Aragorn", "Guerreiro");
+  andarAtual = 0;
+  inimigoAtual = null;
+  masmorra = criarMasmorra();     // <- recria os inimigos com vida cheia
+  habilitarBotoes(true);
+  document.getElementById("log").innerHTML = "";
+  renderTudo();
+}
+```
+
+> **A lição por trás do bug:** objetos são **compartilhados por referência**. Reiniciar as variáveis do jogo não "desfaz" o dano guardado dentro dos objetos inimigos — é preciso criar objetos **novos**. Esse é um dos conceitos mais importantes de todo o curso, e vale destacá-lo bem.
+
+### ⏱️ 40–46 min — Retoques finais
 Sugestões de polimento (cada aluno escolhe uma ou duas):
 
-- Um **`<style>`** simples no `index.html`: cor de fundo, fonte, barra de vida com largura proporcional à vida.
+- Um **`<style>`** simples no `index.html`: cor de fundo, fonte, barra de vida proporcional (largura em % da vida).
 - Mensagem de boas-vindas com o nome do herói.
-- Botão **"Novo Jogo"** que apaga o save (Aula 15).
+- Chamar `habilitarBotoes(false)` ao vencer ou perder, travando as ações no fim.
 - Equilibrar os inimigos para o jogo ser justo.
 
-### ⏱️ 42–52 min — Apresentações
+### ⏱️ 46–54 min — Apresentações
 Cada aluno (ou dupla) mostra o jogo rodando e explica **uma parte do código** que achou interessante. Roteiro rápido para eles seguirem:
 
 1. Mostrar o jogo funcionando (uma batalha, uma compra, o chefe).
 2. Abrir o `game.js` e explicar **uma** função à escolha.
 3. Dizer o que mais gostaria de adicionar no futuro.
 
-### ⏱️ 52–58 min — Ponto de save final
+### ⏱️ 54–58 min — Ponto de save final
 O último commit do curso. Mensagem sugerida: `Aula 16: chefe final e jogo completo`. Peça para conferirem o repositório no GitHub — está tudo lá, aula por aula, do primeiro commit ao último.
 
 ### ⏱️ 58–60 min — Encerramento

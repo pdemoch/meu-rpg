@@ -51,6 +51,7 @@ Atualize o `index.html` para ter lugares onde o JS vai escrever:
   <body>
     <h1>A Masmorra</h1>
     <div id="ficha"></div>
+    <div id="inimigo"></div>
     <div id="log"></div>
     <script src="game.js"></script>
   </body>
@@ -77,6 +78,33 @@ renderFicha(heroi);
 ```
 
 Explique: `getElementById("ficha")` acha a caixa; `innerHTML` **substitui** o conteúdo dela pelo HTML que montamos com template literal.
+
+Faça o mesmo para o inimigo, tratando o caso de não haver nenhum:
+
+```js
+function renderInimigo(inimigo) {
+  const caixa = document.getElementById("inimigo");
+  if (inimigo === undefined || !inimigo.estaVivo()) {
+    caixa.innerHTML = "<p>Nenhum inimigo à vista.</p>";
+    return;
+  }
+  caixa.innerHTML = `
+    <h3>${inimigo.nome}</h3>
+    <p>Vida: ${inimigo.vida}/${inimigo.vidaMaxima}</p>
+  `;
+}
+```
+
+Para não esquecer de atualizar as duas caixas juntas, crie um ajudante que chama tudo:
+
+```js
+function renderTudo(heroi, inimigo) {
+  renderFicha(heroi);
+  renderInimigo(inimigo);
+}
+```
+
+> A partir de agora, sempre que algo mudar (vida, ouro, nível), chamamos `renderTudo(...)` em vez de atualizar cada caixa na mão.
 
 ### ⏱️ 32–45 min — O log de mensagens na tela
 Em vez de `console.log`, vamos **acrescentar** mensagens numa caixa. Note o `+=` (não apagar o que já tem):

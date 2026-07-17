@@ -122,13 +122,17 @@ let heroi;
 let andarAtual = 0;
 let inimigoAtual = null;
 
-const masmorra = [
-  criarInimigo("Rato Gigante", 20, 6, 1),
-  criarInimigo("Goblin", 40, 10, 3),
-  criarInimigo("Esqueleto", 35, 12, 2),
-  criarInimigo("Orc", 60, 14, 6),
-  criarChefe()
-];
+function criarMasmorra() {
+  return [
+    criarInimigo("Rato Gigante", 20, 6, 1),
+    criarInimigo("Goblin", 40, 10, 3),
+    criarInimigo("Esqueleto", 35, 12, 2),
+    criarInimigo("Orc", 60, 14, 6),
+    criarChefe()
+  ];
+}
+
+let masmorra = criarMasmorra();
 
 // ===== INTERFACE (DOM) =====
 function escreverLog(mensagem) {
@@ -278,6 +282,7 @@ function novoJogo() {
   heroi = criarHeroi(nome, "Guerreiro");
   andarAtual = 0;
   inimigoAtual = null;
+  masmorra = criarMasmorra();
   habilitarBotoes(true);
   document.getElementById("log").innerHTML = "";
   escreverLog(`Bem-vindo, ${heroi.nome}! Desça para o primeiro andar.`);
